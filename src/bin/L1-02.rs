@@ -1,5 +1,4 @@
 use std::{env, thread};
-use std::io;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
