@@ -1,12 +1,13 @@
 use tokio::signal;
 use flume::{Sender, Receiver};
 use std::sync::{Arc, atomic::{AtomicBool, Ordering}};
-use std::thread;
+use std::{env, thread};
 use std::time::Duration;
 
 #[tokio::main]
 async fn main() {
-    let num_workers: usize = 4;
+    let args: Vec<String> = env::args().collect();
+    let num_workers: usize = args.get(1).unwrap_or(&"4".to_string()).parse().unwrap_or(4);
     let (tx, rx): (Sender<String>, Receiver<String>) = flume::unbounded();
 
     let running = Arc::new(AtomicBool::new(true));

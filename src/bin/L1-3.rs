@@ -1,10 +1,23 @@
-use std::thread;
+use std::{env, thread};
 use std::sync::mpsc;
 use std::iter::Iterator;
 
 fn main() {
-    let n = 100;
-    let num_threads = 4;
+    let args: Vec<String> = env::args().collect();
+
+    if args.len() < 2 {
+        eprintln!("Usage: cargo run --bin L1-2 -- <amount of numbers>");
+        return;
+    }
+
+    let n: u32 = match args[1].parse() {
+        Ok(n) => n,
+        Err(_) => {
+            eprintln!("Please provide a valid number.");
+            return;
+        }
+    };
+    let num_threads: u32 = 4;
     let chunk_size = n / num_threads;
     let (tx, rx) = mpsc::channel();
 
