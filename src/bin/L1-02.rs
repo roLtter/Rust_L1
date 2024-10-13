@@ -4,7 +4,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
 
     if args.len() < 2 {
-        eprintln!("Usage: cargo run --bin L1-2 -- <amount of numbers>");
+        eprintln!("Usage: cargo run --bin L1-02 -- <amount of numbers>");
         return;
     }
 
